@@ -1,3 +1,6 @@
+// Program to illustrate use of ROOT random number and histogram classes
+// Glen Cowan, RHUL, Physics, November 2007
+
 #include <iostream>
 #include <cmath>
 #include <TH1D.h>
@@ -22,6 +25,10 @@ int main() {
 	vector <double> acceptedProbability{}; //probability of photons that passed through materials as probability vector is full
 	vector <double> finalPhotonEnergy{};   // energy values for the photons that passed through the material 
 	vector <double> randomNumber3{};
+	vector <double> thickness{1, 0.1, 0.01, 2, 10, 0.5, 0.05, 5, 7, 3}; //units of mm
+	vector <double> meanEnergy{7153, 4618, 3764, 6789, 8283, 5627, 4296, 7658, 7975, 7175}; //units of eV
+	vector <double> meanEnergy2{}; //meanenergy calculated by reading value of of root histogram value output.
+	vector <double> standardDeviation2{}; //standard deviation calculated by reading value of root histogram value
 
 
 // Open output file (apparently needs to be done before booking)
@@ -33,46 +40,45 @@ int main() {
 // 2nd argument is histogram title (will appear on plots)
 // 3rd argument is number of bins (type int)
 // 4th and 5th arguments:  upper and lower limits of histogram (type double)
-  //TH1D h_Uniform1("h_Uniform1", "Random Number", 100, 0, 1);
-  //TH1D h_Uniform2("h_Uniform2", "Generated Photon Energies ", 100, 0, 1e4);
-  TH1D h_Uniform3("h_Uniform3", " Energy values of photons that passed through material", 100, 0, 1.1e3);
+  //TH1D h_Uniform1("h_Uniform1", "Random Number", 100, 0, 1); //random number distribution histogram 
+  //TH1D h_Uniform2("h_Uniform2", "Generated Photon Energies ", 100, 0, 1e4); //generated photon energies initial histogram
+  TH1D h_Uniform3("h_Uniform3", " Energy values of 10 million photons that passed through Berylium of thickness x = 5mm", 100, 0, 1e4); //energy values of photons which pass through berylium material.
 
 // Create a TRandom3 object to generate random numbers
   int seed = 12345;
   TRandom3 ran(seed);
 
 double scale1 = 1.e12; //scalefactor
-double scale2 = 1.e-3;
-FunctionFromTable edist("FunctionFromTable/data.txt", scale1);
-FunctionFromTable mdist("FunctionFromTable/lengthData.txt", scale2);
+FunctionFromTable edist("FunctionFromTable/data.txt", scale1); //defining 2 function from table variables and referenceing data to use method for.
+FunctionFromTable mdist("FunctionFromTable/lengthData.txt"); //
 
 // Generate some random numbers and fill histograms
 
   const int numValues = 1000000;
   for (int i=0; i<numValues; ++i){
-    double r1 = ran.Rndm();             // uniform in [0,1]
-	double r2 = ran.Rndm();
-	double Emax = 1e4;
-	double Fmax = 2e13 /scale1 ;
+    double r1 = ran.Rndm();             // random number between 0 and 1
+	double r2 = ran.Rndm(); 			//random number between 0 and 1 
+	double Emax = 1e4;					//emax value from visual inspection of largest E value in data.txt graph
+	double Fmax = 2e13 /scale1 ;		//fmax value from visual inspection of peak of graph from data.txt
 	//std::cout << "r1 = " << r1  << "\n";
 	//std::cout << "r2 = " << r2 << "\n";
 	//std::cout << "Emax = " << Emax << "\n";
-	//std::cout << "Fmax = " << Fmax << "\n";
-	double E = r1 * Emax;
+	//std::cout << "Fmax = " << Fmax << "\n";  //lines 63-66 debugging purposes
+	double E = r1 * Emax;					    // E variable defined
 	//h_Uniform1.Fill(r1);
 	//std::cout << "E = " << E << "\n";
-	TotalEnergyValues.push_back(E);
-	double f = (r2 * Fmax);
-	double y = edist.val(E);
+	TotalEnergyValues.push_back(E);					// Current E values of flat histogram stored in TotalEnergyValues vector
+	double f = (r2 * Fmax);							// f variable defined
+	double y = edist.val(E);						// y variable defined and obtained by using functionfromtable class above
 	//std::cout << "f = " << f << "\n"; 
 	//std::cout << i << " y = " << y << "\n";
 	
-	if (f < y) {
+	if (f < y) {		// IMPORTANTif point(E, F) is below curve, accept E as the generated photon energy. otherwise repeat until a value is accepted.
 		energyAcceptanceValues.push_back(E);
-		double attenLength = mdist.val(E);
-		attenuationLength.push_back(attenLength);
-		//h_Uniform2.Fill(E);
-		if (numValues < 120) {
+		double attenLength = mdist.val(E);			//uses function from table class
+		attenuationLength.push_back(attenLength);		//saves this current attenuation length data in a vector and is looped over in this loop until iterations are comeplete
+		//h_Uniform2.Fill(E);								
+		if (numValues < 120) {			//DEBUGING purposes IGNORE BELOW CODE
 			//std:cout << " Energy value is accepted. vector updated ";
 			//std::cout << "\n" << i << " f = " << f << "\n";
 			//std::cout << i << " y = " << y << "\n";
@@ -85,25 +91,25 @@ FunctionFromTable mdist("FunctionFromTable/lengthData.txt", scale2);
 		
 		}
 	}
-    int counter = energyAcceptanceValues.size(); 
+    int counter = energyAcceptanceValues.size();  //variable to use size of real energy values vector size as limit for loop below
   
   for (int n = 0; n < counter; ++n) {
-	  //define r3 which is a random number 
+	  //define r3 which is a random number between 0 and 1
 	  double r3 = ran.Rndm();
 	  //std::cout << "\nr3 = " << r3;
 	  //define x which is thickness of material
-	  double x = 1000; // 1mm
+	  double x = 5000; 
 	  //define P which is the probability of energy E absorbed before x
 	  double p = 1-exp(-x/attenuationLength[n]);
 	  //std::cout<< "\n P = " << p ;
 	  //1
 	  probability.push_back(p);
 	  //std::cout << "\n" << " For photon:" << n << " ,energy value = " << energyAcceptanceValues[n] << " ,Probability for photon being absorbed = " << p << "\n";
-	  if (r3 > p) {
-		acceptedProbability.push_back(p);
-		finalPhotonEnergy.push_back((energyAcceptanceValues[n]));
-		randomNumber3.push_back(r3);
-		h_Uniform3.Fill(energyAcceptanceValues[n]);
+	  if (r3 > p) {			//IMPORTANT if r<p then photon is absorbed. if not it makes it through. SO i used if r>p then photon passes through material.
+		acceptedProbability.push_back(p);	//saves current probability value in vector
+		finalPhotonEnergy.push_back((energyAcceptanceValues[n]));   //saves current photon energy value as a vector
+		randomNumber3.push_back(r3);			
+		h_Uniform3.Fill(energyAcceptanceValues[n]); //saving the photons which passed through the material in the histogram plot
 		//std:cout << n ; //7
 		//std::cout << "The photon has made it through the material " ;
 		//Now i want to save the photons that made it through the material so i want to know these photons energy values!
@@ -126,14 +132,14 @@ FunctionFromTable mdist("FunctionFromTable/lengthData.txt", scale2);
   //std::cout<< " \n Probability vector contents below: \n" ;
   //print(probability);
   //std::cout << "size of total probability vector = " << probability.size();
-  std::cout << " \n " ;
-  std::cout << " accepted photon probability vector size  " << acceptedProbability.size();
+  std::cout << "\n" ;
+  std::cout << "accepted photon probability vector size  " << acceptedProbability.size();
   std::cout << " \n " ;
   if (acceptedProbability.size() >0) {
 		//std::cout << "Final probability values: \n" ;
 		//print(acceptedProbability);
   }
-  std::cout << "\n accepted photon energy value size " << finalPhotonEnergy.size();
+  std::cout << "\naccepted photon energy value size " << finalPhotonEnergy.size();
   std::cout << " \n " ;
   if (finalPhotonEnergy.size() > 0) {
 	//std::cout << "Final photon energy value vector: \n" ;
@@ -154,3 +160,6 @@ FunctionFromTable mdist("FunctionFromTable/lengthData.txt", scale2);
 
   return 0;
 }
+
+
+
