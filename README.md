@@ -56,21 +56,21 @@ builds.sh
 -  Column 2 was the frequency in photons per second
 
 lengthData.txt
-// important dataset covering part 2 of the project (Interaction of x-rays with matter)
-// column 1 was the energy values in ev from 30ev to 10^4 ev
-// column 2 was the attenuation length in microns(10^-6 of a metre) of Berylium at an angle of 90degrees.
+-  important dataset covering part 2 of the project (Interaction of x-rays with matter)
+-  column 1 was the energy values in ev from 30ev to 10^4 ev
+-  column 2 was the attenuation length in microns(10^-6 of a metre) of Berylium at an angle of 90degrees.
 
 FunctionFromTable.cc
-// source code for functionFromTable class to create a function from a table of (x,y) values.
+-  source code for functionFromTable class to create a function from a table of (x,y) values.
 
 FunctionFromTable.h
-// header file for FunctionFromTable class include in the FunctionFromTable.cc.
+-  header file for FunctionFromTable class include in the FunctionFromTable.cc.
 
 plotComparison.py
-// basic python file using matploiblib and numpy to read data from the data.txt file and output a graph based on its data. 
-// execute with 'python3 plotComparison.py' in command line
+-  basic python file using matploiblib and numpy to read data from the data.txt file and output a graph based on its data. 
+-  execute with 'python3 plotComparison.py' in command line
 
 pythonPlot.png
-// output file of plotcomparison.py which generates a png showing energy vs frequency from data.txt dataset.
+-  output file of plotcomparison.py which generates a png showing energy vs frequency from data.txt dataset.
 
 
