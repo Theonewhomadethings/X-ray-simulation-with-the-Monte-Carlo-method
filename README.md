@@ -14,33 +14,33 @@ simpleMC.cc:
 - Then type './simpleMC' in command line to execute simpleMC exe file
 
 plotUniform.C
-// Simple ROOT macro to plot a histogram.
-// To execute, type .X plotUniform.C
-//  This specific histogram was used in conjuction with simpleMC.cc to output a histogram for the uniform distrubtion of a random number.
+-  Simple ROOT macro to plot a histogram.
+-  To execute, type .X plotUniform.C
+-   This specific histogram was used in conjuction with simpleMC.cc to output a histogram for the uniform distrubtion of a random number.
 
 plotUniform1.C
-// Simple ROOT macro to plot a histogram.
-// To execute, type .X plotUniform.C
-// This specific histogram was used in conjuction with simpleMC.cc to output a histogram for changing a flat energy values histogram to a curb=
+-  Simple ROOT macro to plot a histogram.
+-  To execute, type .X plotUniform.C
+-  This specific histogram was used in conjuction with simpleMC.cc to output a histogram for changing a flat energy values histogram to a curve.
 
 plotUniform2.C
-// Simple ROOT macro to plot a histogram.
-// To execute, type .X plotUniform.C
+-  Simple ROOT macro to plot a histogram.
+-  To execute, type .X plotUniform.C
 -plotter.py
 
 GNUmakefile
-// This is a simple makefile to build programs that require the ROOT
-//  Type gmake in command line to build the program; use gmake test to look e.g. at values of defined variables; use gmake clean to remove executable and object files.  
+- This is a simple makefile to build programs that require the ROOT
+-   Type gmake in command line to build the program; use gmake test to look e.g. at values of defined variables; use gmake clean to remove executable and object files.  
 
 build.sh
-// This is just a build script.
+-  This is just a build script.
 
 plotter.py
-// python source code to use matplotlib to plot a basic thickness vs mean energy values scatter plot with error bars, using manually inputed values that arise from the histograms generated from simpleMC.cc.
-// execute with 'python3 plotter.py' in command line
+-  python source code to use matplotlib to plot a basic thickness vs mean energy values scatter plot with error bars, using manually inputed values that arise from the histograms generated from simpleMC.cc.
+-  execute with 'python3 plotter.py' in command line
 
 thicknessVsMeanEnergyPlot.png
-// output file from source code of plotter.py. Image shows a histogram of thickness vs mean energy values 
+- output file from source code of plotter.py. Image shows a histogram of thickness vs mean energy values 
 
 
 
