@@ -48,12 +48,12 @@ thicknessVsMeanEnergyPlot.png
 Sub folder "simpleMC/FunctionFromTable" contains:
 
 builds.sh
-// just a build script 
+-  just a build script 
 -data.txt
-// important dataset covering part 1 of the project (stimulation of xray photons from synchrotron radiation)
-// Contains 2 columns: 
-// Column 1 was the energy values in ev from 10 ev to 10^4 ev.
-// Column 2 was the frequency in photons per second
+-  important dataset covering part 1 of the project (stimulation of xray photons from synchrotron radiation)
+-  Contains 2 columns: 
+-  Column 1 was the energy values in ev from 10 ev to 10^4 ev.
+-  Column 2 was the frequency in photons per second
 
 lengthData.txt
 // important dataset covering part 2 of the project (Interaction of x-rays with matter)
