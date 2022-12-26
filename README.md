@@ -8,10 +8,10 @@ subfolder within main directory folder is titled: FunctionFromTable
 
 Main directory "simpleMC" contains:
 
-simpleMC.cc
-// simpleMC.cc is the core program in this project that I worked on. This program contains the source code for the software implementation. This implementation includes; simulating the xray photons from synchotron radiation and the interaction of these xray photons with a material which was Berylium in this case.
-// To execute type 'gmake' in command line to compile simpleMC.cc file (runs the GNUmakefile discussed below which includes simpleMC.cc)
-// Then type './simpleMC' in command line to execute simpleMC exe file
+simpleMC.cc:
+- simpleMC.cc is the core program in this project that I worked on. This program contains the source code for the software implementation. This implementation includes; simulating the xray photons from synchotron radiation and the interaction of these xray photons with a material which was Berylium in this case.
+- To execute type 'gmake' in command line to compile simpleMC.cc file (runs the GNUmakefile discussed below which includes simpleMC.cc)
+- Then type './simpleMC' in command line to execute simpleMC exe file
 
 plotUniform.C
 // Simple ROOT macro to plot a histogram.
