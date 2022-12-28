@@ -1,6 +1,3 @@
-// Program to illustrate use of ROOT random number and histogram classes
-// Glen Cowan, RHUL, Physics, November 2007
-
 #include <iostream>
 #include <cmath>
 #include <TH1D.h>
