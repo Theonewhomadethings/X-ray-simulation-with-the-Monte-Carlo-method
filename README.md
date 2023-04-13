@@ -1,5 +1,13 @@
 # "X-ray simulation with the Monte Carlo method" Miniproject
 
+Outputs
+
+![histogram01 (1)](https://user-images.githubusercontent.com/88815725/231653813-d817b7bf-8395-4361-af8f-b0f3aa02cf22.png)
+![histogram2 (1)](https://user-images.githubusercontent.com/88815725/231653825-e9c0c393-a156-46dc-96da-75c0b58078af.png)
+![thicknessVsMeanEnergyPlot (1)](https://user-images.githubusercontent.com/88815725/231653832-2261e8c0-c601-4a46-9e42-0ef90e11c56c.png)
+
+
+
 This file should give a brief description of the directory space I am using, what each file is used for and how to exectute each in the command line.
 all datasets are obtained from 'www.cxro.lbl.gov'
 
